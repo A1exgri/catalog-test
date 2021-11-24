@@ -1,0 +1,67 @@
+<div *ngIf="form; else loading">
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>Update product</h1>
+
+  <div class="form-group mb-4">
+    <label for="name" [ngClass]="{invalid: form.get('name').invalid && form.get('name').touched}">Enter Product name</label>
+    <input type="text" class="form-control" formControlName="name" id="name" />
+    <div class="invalid" *ngIf="form.get('name').invalid && form.get('name').touched">
+      <small *ngIf="form.get('name').errors?.required">Product name is required!</small>
+      <small *ngIf="form.get('name').errors?.minlength || form.get('name').errors?.maxlength">
+        Product name must be at least {{form.get('name').errors.minlength.requiredLength }} characters.
+        Max - {{form.get('name').errors.maxlength.requiredLength }}.
+        Now it is {{form.get('name').errors.maxlength.actualLength}} characters</small>
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="price" [ngClass]="{invalid: form.get('price').invalid && form.get('price').touched}">Enter Price</label>
+    <input type="number" class="form-control" formControlName="price" id="price" />
+    <div class="invalid" *ngIf="form.get('price').invalid && form.get('price').touched">
+      <small *ngIf="form.get('price').errors?.required">Price is required!</small>
+      <small *ngIf="form.get('price').errors?.min ">Price > $0.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="category" [ngClass]="{invalid: form.get('category').invalid && form.get('category').touched}">Chose category</label>
+    <select formControlName="category" id="category" class="form-control">
+      <option *ngFor="let category of categories" [value]="category.name" >{{category.name}}</option>
+    </select>
+    <div class="invalid" *ngIf="form.get('category').invalid && form.get('category').touched">
+      <small *ngIf="form.get('category').errors?.required">Category is required!</small>
+
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="shelfLife" [ngClass]="{invalid: form.get('shelfLife').invalid && form.get('shelfLife').touched}">Enter Shelf Life</label>
+    <input type="date" class="form-control" formControlName="shelfLife" id="shelfLife" />
+    <div class="invalid" *ngIf="form.get('shelfLife').invalid && form.get('shelfLife').touched">
+      <small *ngIf="form.get('shelfLife').errors?.required">Product date is required!</small>
+      <small *ngIf="form.get('shelfLife').errors.minDate">Product date > date now</small>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="form-group">
+      <button class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">
+        Update product
+      </button>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-danger btn-block" (click)="remove()">
+        Delete product
+      </button>
+    </div>
+  </div>
+</form>
+</div>
+<ng-template #loading>
+  <h2 class="text-center">Loading...</h2>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+</ng-template>

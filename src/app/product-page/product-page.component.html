@@ -1,0 +1,24 @@
+<div *ngIf="product$ | async as product ; else loading">
+<div class="">
+  <a [routerLink]="['/products']"> &#8592;Back </a>
+</div>
+
+<div class="card">
+  <h1>{{product.name}}</h1>
+  <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Заглушка изображения" preserveAspectRatio="xMidYMid slice" focusable="false">
+   <rect width="100%" height="100%" fill="#6c757d"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">Img</text>
+  </svg>
+  <div class="card-body">
+    <p class="card-text">Price: <strong>${{product.price}}</strong></p>
+    <p class="card-text">Expiration date: {{product.shelfLife}}</p>
+  </div>
+</div>
+</div>
+<ng-template #loading>
+  <h2 class="text-center">Loading...</h2>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+</ng-template>

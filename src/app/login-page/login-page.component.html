@@ -1,0 +1,31 @@
+<div class="card card-form">
+    <h1>Login</h1>
+    <form name="form" [formGroup]="form" (ngSubmit)="submit()">
+      <div *ngIf="auth.error$ | async as error" class="alert alert-danger">{{error}}</div>
+      <div class="form-group mb-4">
+        <label for="email" [ngClass]="{invalid: email.invalid && email.touched}">Email</label>
+        <input type="email" class="form-control" formControlName="email" id="email" />
+        <div class="invalid" *ngIf="email.invalid && email.touched">
+          <small *ngIf="email.errors?.required">Email is required!</small>
+          <small *ngIf="email.errors?.email">Email is invalid!</small>
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label for="password" [ngClass]="{invalid: password.invalid && password.touched}">Password</label>
+        <input type="password" class="form-control" formControlName="password" id="password" />
+        <div class="invalid" *ngIf="password.invalid && password.touched">
+            <small *ngIf="password.errors?.required">Password is required</small>
+            <small *ngIf="password.errors?.minlength">Password must be at least {{password.errors.minlength.requiredLength}} characters.
+              Now it is {{password.errors.minlength.actualLength}} characters</small>
+          </div>
+
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" [disabled]="form.invalid || disabled">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+

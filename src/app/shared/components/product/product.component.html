@@ -1,0 +1,16 @@
+<div class="card mb-3">
+  <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Заглушка изображения" preserveAspectRatio="xMidYMid slice" focusable="false">
+    <title>{{product.name}}</title>
+    <rect width="100%" height="100%" fill="#6c757d"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">Img</text>
+  </svg>
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">{{product.category}}</p>
+    <p class="card-text">{{product.price}}</p>
+    <div class="d-flex justify-content-between">
+      <a [routerLink]="['/product', product.id]" class="btn btn-primary">More</a>
+      <a [routerLink]="['/product', product.id, 'edit']" class="btn btn-secondary">Edit</a>
+    </div>
+  </div>
+</div>
+
